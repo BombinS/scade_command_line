@@ -1,4 +1,4 @@
-import os, shutil, logging
+import os, shutil, logging, subprocess
 
 import config
 
@@ -40,3 +40,10 @@ def get_command(dst, src, author):
     command = f'\"{executable}\" -out {dst} -files {src} -author {author}'
     return command
 
+def execute(command):
+    p = subprocess.run(command, capture_output=True, text=True)
+    if (p.returncode != 0):
+        logging.error(p.stderr)
+        return
+    else:
+        return p.stdout.splitlines()

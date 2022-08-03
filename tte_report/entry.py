@@ -40,11 +40,11 @@ def main():
     if test_results_file == False:
         job_failed()
     
-    # собрать общий отчет
+    # получить общий отчет
     command = process.get_command(config.tte_report_results, test_results_file, 'bombin')
-    print(command)
-
-    print('Process completed successfully')
+    status_info = process.execute(command)
+    for info in status_info:
+        print(info)
 
 if __name__ == '__main__':
     main()
