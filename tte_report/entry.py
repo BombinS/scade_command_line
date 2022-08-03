@@ -8,6 +8,10 @@ import config
 import validate
 import process
 
+def process_failed():
+    print('Process has failed')
+    exit()        
+
 def main():
     
     # очистка
@@ -19,18 +23,16 @@ def main():
     
     # валидация пути к директории Scade
     if validate.is_directory_exist(config.path_to_scade_bin) == False:
-        print('Process has failed')
-        exit()
+        process_failed()
 
     # валидация пути к директориям тестов
     if validate.is_directory_exist(config.path_to_test_results) == False:
-        print('Process has failed')
-        exit()
+        process_failed()
 
-    # поиск результатов тестов
+    # поиск результатов тестов, валидация поиска
     test_results = process.search_raw_test_result_files(config.path_to_test_results)
-
-    # валидация поиска результатов тестов
+    if validate.is_test_results_exist(test_results) == False:
+        process_failed()
 
     # сформировать файл с путями к raw файлам результатов
 

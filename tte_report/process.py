@@ -7,5 +7,5 @@ def search_raw_test_result_files(path):
         for file in files:
             name = file.lower()
             if '.txt' in name and '_raw' in name:
-                result.append(os.path.join(root, file))
+                result.append(os.path.abspath(os.path.join(root, file)))
     return result
