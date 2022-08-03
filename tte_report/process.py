@@ -15,21 +15,28 @@ def search_raw_test_result_files(path):
 
 def form_test_results_file(test_results):
     temp_directory = 'tmp'
-    source_of_test_results = os.path.join(temp_directory,'source_of_test_results.txt')
+    tte_report_tmp = os.path.join(temp_directory,'tte_report_tmp.txt')
 
     try:
         if os.path.exists(temp_directory):
             shutil.rmtree(temp_directory)
         os.mkdir(temp_directory)
 
-        f = open(source_of_test_results, 'w' ) 
+        f = open(tte_report_tmp, 'w' ) 
         for test_result in test_results:   
             f.write(f'{test_result}\n')
         f.close()    
 
-        logging.info(f'The file with all test results created as \"{source_of_test_results}\"')
-        return True
+        logging.info(f'The file with all test results created as \"{tte_report_tmp}\"')
+        return tte_report_tmp
     
     except:
         logging.error('Unexpected error due creation of file with all test results')
         return False
+
+
+def get_command(dst, src, author):
+    executable = os.path.join(config.path_to_scade_bin,'QTEREPORT.exe')
+    command = f'\"{executable}\" -out {dst} -files {src} -author {author}'
+    return command
+
