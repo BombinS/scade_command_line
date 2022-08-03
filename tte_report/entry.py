@@ -8,7 +8,7 @@ import config
 import validate
 import process
 
-def process_failed():
+def job_failed():
     print('Process has failed')
     exit()        
 
@@ -23,19 +23,21 @@ def main():
     
     # валидация пути к директории Scade
     if validate.is_directory_exist(config.path_to_scade_bin) == False:
-        process_failed()
+        job_failed()
 
     # валидация пути к директориям тестов
     if validate.is_directory_exist(config.path_to_test_results) == False:
-        process_failed()
+        job_failed()
 
     # поиск результатов тестов, валидация поиска
     test_results = process.search_raw_test_result_files(config.path_to_test_results)
     if validate.is_test_results_exist(test_results) == False:
-        process_failed()
+        job_failed()
 
     # сформировать файл с путями к raw файлам результатов
-
+    if process.form_test_results_file(test_results) == False:
+        job_failed()
+    
     # собрать общий отчет
 
     print('Process completed successfully')
