@@ -1,26 +1,15 @@
 #!/usr/bin/env python
 
-import subprocess
-import logging
-import os
-
-import config
-import validate
-import process
+import config, validate, process, init
 
 def job_failed():
     print('Process has failed')
     exit()        
 
 def main():
-    
-    # очистка
-    log_filename = 'tte_report.log'
-    if (os.path.exists(log_filename)):   
-        os.remove(log_filename)
 
-    # инициализация логера
-    logging.basicConfig(filename=log_filename, level=logging.DEBUG)
+    # очистка и инициализация логера
+    init.cleanup_and_setup()
     
     # валидация пути к директории Scade
     if validate.is_directory_exist(config.path_to_scade_bin) == False:
@@ -41,7 +30,7 @@ def main():
         job_failed()
     
     # получить общий отчет
-    command = process.get_command(config.tte_report_results, test_results_file, 'bombin')
+    command = process.get_command(config.tte_report_results, test_results_file, config.author)
     status_info = process.execute(command)
     for info in status_info:
         print(info)
