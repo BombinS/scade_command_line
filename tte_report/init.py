@@ -1,9 +1,10 @@
 import os, logging
+import config
 
 def cleanup_and_setup():
     
     # удаление предыдущего лога
-    log_filename = 'tte_report.log'
+    log_filename = config.tte_report_log
     if (os.path.exists(log_filename)):   
         os.remove(log_filename)
 

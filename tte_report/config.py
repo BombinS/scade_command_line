@@ -19,7 +19,7 @@ author='AVIAOK'
 tte_report_results='tte_report_results.txt'
 
 # лог
-tte_report_log=''
+tte_report_log='tte_report.log'
 
 # файл содержащий пути ко всем компонентным отчетам
-tte_report_sources=''
+tte_report_sources='tmp\\tte_report_sources.txt'
