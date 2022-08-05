@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-import config, validate, process, init
+from modules import validate, process, init
+import config
 
 def job_failed():
     print('Process has failed')
