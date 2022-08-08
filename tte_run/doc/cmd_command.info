@@ -1,0 +1,32 @@
+Running Testing Environment Batch Test
+For certification activities, you run tests in batch as described below. Before running any
+tests on host, you must verify the Testing Environment integrity as detailed in “Verifying
+Testing Environment Installation Integrity” on page 192.
+
+To run model test in batch
+Use the following command line syntax and options:
+Note
+When running model tests, Testing Environment batch automatically checks test data (in STP
+file) for the proper initialization of all sensors and inputs of the tested operator. Any
+initialization failure is reported as a warning and does not prevent code execution.
+QTE -tee -conf <configuration>
+-test_file <stp file>
+-target_dir <dir>
+[-tee:real_digits <value> ]
+[-tee:nobuild]
+[-report:details <full | failed>]
+<project>
+
+Possible command options and parameters:
+• -tee: to launch TEE on specified project with specified options described below
+• -conf <configuration>: to specify the name of the configuration used to build the model
+executable with TEE specific settings
+• -test_file <stp file>: to specify the path to the STP file containing test data descriptions
+required by TEE (see “Producing Test Data for Testing Environment Batch” on page 186)
+• -target_dir <dir>: to specify the name of the directory for test execution output files
+• -tee:real_digits: to set the precision (max. number of displayed digits) of real numbers logged
+in simulation trace file. <value> must be an integer between 1 and 17 included (default is 5).
+• -tee:nobuild: to skip code generation and build phases and use an existing model executable
+• -report:details <full | failed>: to produce a conformance report with all test result details
+or only result details about failed tests (see “Reading Test Conformance Reports” on page 177)
+• <project>: to specify the name of (or path to) the ETP project to be tested
