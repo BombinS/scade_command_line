@@ -13,6 +13,7 @@ def search_raw_test_result_files(path):
     
     return result
 
+
 def form_test_results_file(test_results):
     tte_report_sources = config.tte_report_sources
     tte_report_sources_dir = os.path.dirname(tte_report_sources)
@@ -41,6 +42,7 @@ def get_command(dst, src, author):
     command = f'\"{executable}\" -out {dst} -files {src} -author {author}'
     logging.info(f'Command for gathering the global report is - {command}')
     return command
+
 
 def execute(command):
     p = subprocess.run(command, capture_output=True, text=True)

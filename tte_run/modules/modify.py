@@ -2,7 +2,7 @@ import xml.etree.ElementTree as et
 import config
 
 def modify_ept_file(path):
-    print(path)
+    
     tree = et.parse(path)
     root = tree.getroot()
     

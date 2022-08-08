@@ -17,16 +17,16 @@ def main():
     for project in projects:
         
         # модификация проекта
-        modify.modify_ept_file(project)
+        # modify.modify_ept_file(project)
 
         # поиск тестовой процедуры
         procedures = process.search_stp_files(project)
 
         # для каждой процедуры
         for procedure in procedures:
-            print(f"{project} - {procedure}")
-
             # формирование команды
+            command = process.get_command(config.path_to_scade_bin, config.path_to_root_model, procedure)
+            print(command)
 
             # выполнение команды
 
