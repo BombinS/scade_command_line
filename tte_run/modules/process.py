@@ -1,4 +1,4 @@
-import os
+import os, subprocess
 
 def search_etp_files(path):
     result = []
@@ -33,3 +33,10 @@ def get_command(scade_bin, root_model, procedure):
     scade_executable = os.path.join(scade_bin, 'QTE.exe')
     command = f'\"{scade_executable}\" -tee -tee:nobuild -conf "KCG" -test_file \"{procedure}\" -target_dir \"{result_directory}\" \"{root_model}\"'
     return command
+
+def execute_command(command):
+    p = subprocess.run(command, capture_output=True, text=True)
+    if p.returncode != 0:
+        print(p.stderr)
+    else:
+        return p.stdout.splitlines()

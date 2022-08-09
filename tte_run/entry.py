@@ -26,9 +26,9 @@ def main():
         for procedure in procedures:
             # формирование команды
             command = process.get_command(config.path_to_scade_bin, config.path_to_root_model, procedure)
-            print(command)
 
             # выполнение команды
+            command_execution_result = process.execute_command(command)
 
     pass
 
