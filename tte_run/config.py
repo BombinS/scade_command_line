@@ -9,9 +9,11 @@ path_to_scade_bin='c:\\Program Files (x86)\\Esterel Technologies\\SCADE R16.2.1\
 path_to_root_model = 'c:\\Aviaok\\MC21\\Scade\\M_FWA_SCADE\\M_FWA_SCADE.etp'
 
 # пусть к директории тестов Scade
-path_to_test_folder='c:\\Aviaok\\MC21\\workspace'
+path_to_test_folder='c:\\Aviaok\\MC21\\workspace2'
 
 #------------------------------------------------------------------------------------------------------------------------------------------
 # internal (service) section
 #------------------------------------------------------------------------------------------------------------------------------------------
 
+# наименование лога
+tte_run_log = 'tte_run.log'

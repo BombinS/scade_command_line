@@ -1,4 +1,4 @@
-import os, subprocess
+import os, subprocess, logging, datetime
 
 def search_etp_files(path):
     result = []
@@ -13,16 +13,19 @@ def search_etp_files(path):
 
 
 def search_stp_files(path):
+    logging.info('------------------------------------------------------------------------------------------------------')
+    logging.info(f'found test project {path}')
     result = []
 
     search_directory = os.path.dirname(path)
     for root, dirs, files in os.walk(search_directory):
         for file in files:
             name = file.lower()
-            if '.stp' in name and not 'gen' in name:
+            if '.stp' in name:
                 fullname = os.path.abspath(os.path.join(root, file))
                 if not '\\gen\\' in fullname:
                     result.append(fullname)
+                    logging.info(f'found test procedure {fullname}')
 
     return result
 
@@ -35,8 +38,16 @@ def get_command(scade_bin, root_model, procedure):
     return command
 
 def execute_command(command):
-    p = subprocess.run(command, capture_output=True, text=True)
+    logging.info(f'execute command: {command}')
+    
+    t1 = datetime.datetime.now()
+    p = subprocess.run(command, capture_output=True, text=True)    
+    t2 = datetime.datetime.now()
+    delta = t2 - t1
+    logging.info(f'elapsed time: {delta.seconds} seconds')
+    
     if p.returncode != 0:
-        print(p.stderr)
+        print(p.stderr, flush=True)
+        logging.error('failure')
     else:
-        return p.stdout.splitlines()
+        logging.info('success')
