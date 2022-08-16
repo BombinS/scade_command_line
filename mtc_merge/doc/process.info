@@ -1,0 +1,59 @@
+Running MTC-Model Merge
+
+Use the following command to merge coverage results from several acquisition sessions on the same model (without using the instrumented project) and produce a merged coverage
+report and all required logs:
+
+SCADE –MTC_MERGE|-mtc_merge <Project>
+-cov_files <CoverageFile1.crf> <CoverageFile2.crf> ...
+[-justif_files <JustifFile1.txt> <JustifFile2.txt> ...]
+[-target_dir <Directory>]
+[-author <Author>]
+[-result_project <MTCResultProject>]
+[-help | -version
+
+Possible command options and parameters:
+• –MTC_MERGE|-mtc_merge to launch MTC-Model batch merge on the specified project
+• <Project> to specify the pathname of the SCADE Suite model (not instrumented) to use to merge
+coverage results. If you merge results from different projects, it is necessary to specify a global
+project that references all the other projects.
+• -cov_files <CoverageFile1.crf> <CoverageFile2.crf> to specify the path to each coverage
+result file to merge (all corresponding CDF files are necessary to check criteria and results)
+• -justif_files <JustifFile1.txt> <JustifFile2.txt> (optional) to specify the path to each
+text file (containing justifications to consolidate coverage when needed) to merge with coverage
+results
+• -target_dir <Directory> (optional) to specify the directory where the output files are stored.
+By default, a generation directory named MTC_<project_name>_merged is created in the same
+directory as <Project>.
+• -author <Author> (optional) to specify the author of the batch merge session
+• -result_project <MTC Result Project> (optional) to specify the creation of a result project
+containing all coverage result files of the current acquisition. The project is generated in the
+working directory. If the result project already exists, the coverage files are added to it. This
+result project is not part of the qualified data of MTC, but enables the display of results in MTC
+user interface.
+
+INPUT AND OUTPUT FILES
+The justification files can be written manually in the required syntax or exported from model. For details about the syntax of textual justifications, see “Input Justification File for
+MTC-Model” on page 214 in SCADE Suite Technical Manual. For details about textual justification export, see “Covering Coverage Cases by Justification” on page 763.
+
+Note
+For more details about MTC-Model batch merge for certification, consult the Tool Operational Requirements of SCADE Suite MTC-Part II (TOR) distributed with the Qualified MTC
+certification data available from Esterel Technologies Support service.
+
+The coverage result file (CRF) and the criteria definition file (CDF) produced in batch merge are stored and named as follows:
+<TargetDir>\<project_name>_merged.crf
+<TargetDir>\<project_name>_merged.cdf
+
+The coverage result file contains the following elements:
+• All merged coverage records from coverage files set in the command line.
+• All justification records from textual justification files set in the command line.
+
+The coverage report produced in batch merge is stored and named as follows:
+<TargetDir>\MTC_<project_name>_merged.txt
+
+The structure of the merge coverage report is the following:
+1 General information about the batch session and its parameters
+2 Input description providing details about the project, the predefined coverage and integration criteria, the user criteria (if any), and the scenario/justification records.
+3 Coverage information providing: synthesis about overall coverage with some details by operators and records.
+
+The logs produced in batch merge are stored and named as follows:
+<TargetDir>\MTC_<project_name>_merged.log
