@@ -1,6 +1,5 @@
 import os, subprocess, logging, datetime
 from posixpath import splitext
-from unittest import result
 
 def search_coverage_files(path):
     result = []
@@ -16,12 +15,20 @@ def search_coverage_files(path):
     return result
 
 
-def get_command(scade_bin, root_model, procedure):
-    result_directory = os.path.splitext(procedure)[0]
-    result_directory = result_directory.replace('\\gen','',1) + '_Auto_Results'
-    result_directory = os.path.join(result_directory,'QTE_CLCM')
-    scade_executable = os.path.join(scade_bin, 'CLCMACQ.exe')
-    command = f'\"{scade_executable}\" \"{root_model}\" -conf "KCG" -test_file \"{procedure}\" -target_dir \"{result_directory}\" '
+def get_command(scade_bin, root_model, temp_coverage_directory,  coverage1, coverage2):
+    temp_coverage_directory = os.path.abspath(os.path.join(os.curdir, temp_coverage_directory))
+    scade_executable = os.path.join(scade_bin, 'CLCMREPORT.EXE')
+    if not os.listdir(temp_coverage_directory):
+        command = f'\"{scade_executable}\" \"{root_model}\" -conf "KCG" -cov_files \"{coverage1}\" \"{coverage2}\" -target_dir \"{temp_coverage_directory}\" '
+    else:
+        merged_coverage = ''
+        for root, dirs, files in os.walk(temp_coverage_directory):
+            for file in files:
+                name = file.lower()
+                if '_coverage_merged.info' in name:
+                    merged_coverage = os.path.abspath(os.path.join(root, file))
+        command = f'\"{scade_executable}\" \"{root_model}\" -conf "KCG" -cov_files \"{merged_coverage}\" \"{coverage2}\" -target_dir \"{temp_coverage_directory}\" '
+
     return command
 
 

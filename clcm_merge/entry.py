@@ -19,26 +19,20 @@ def main():
 
     # для каждого проекта
     n = 1
-    for project in projects:
-
+    for i in range(0, number_of_projects - 1):
         # прогресс
         print('----------------------------------------------------------------------------------------------------------------------------')
         print(f'project {n}/{number_of_projects}')
-        print(project, flush=True)
+        print(projects[i], '+', projects[i+1], flush=True)
+
+        # формирование команды
+        command = process.get_command(config.path_to_scade_bin, config.path_to_root_model, config.clcm_temp_directory, projects[i], projects[i+1])
+
+        # выполнение команды
+        process.execute_command(command)
+
+        # перещение результатов последнего слияния
         
-        # # поиск тестовой процедуры
-        # procedures = process.search_stp_files(project)
-
-        # # для каждой процедуры
-        # for procedure in procedures:
-        #     print(project, ' : ', procedure)
-
-        #     # формирование команды
-        #     command = process.get_command(config.path_to_scade_bin, config.path_to_root_model, procedure)
-        #     print(command)
-
-        #     # выполнение команды
-        #     process.execute_command(command)
 
         n += 1
 
