@@ -23,16 +23,17 @@ def main():
         # прогресс
         print('----------------------------------------------------------------------------------------------------------------------------')
         print(f'project {n}/{number_of_projects}')
-        print(projects[i], '+', projects[i+1], flush=True)
+        # print(projects[i], '+', projects[i+1], flush=True)
 
         # формирование команды
         command = process.get_command(config.path_to_scade_bin, config.path_to_root_model, config.clcm_temp_directory, projects[i], projects[i+1])
+        print(command)
 
         # выполнение команды
         process.execute_command(command)
 
-        # перещение результатов последнего слияния
-        
+        # перемещение результатов последнего слияния
+        process.move_results(config.clcm_temp_directory)
 
         n += 1
 
