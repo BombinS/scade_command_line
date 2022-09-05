@@ -11,17 +11,18 @@ def cleanup_and_setup():
     # инициализация логера
     logging.basicConfig(filename=log_filename, level=logging.DEBUG)
 
+    # очистка директории сбора общего покрытия
+    coverage_directory = os.path.join(os.curdir, config.clcm_temp_directory)
+    if os.path.exists(coverage_directory):
+        shutil.rmtree(coverage_directory)
+    os.mkdir(coverage_directory)
+
     # очистка временной директории сбора общего покрытия
-    temp_coverage_directory = os.path.join(os.curdir, config.clcm_temp_directory)
+    temp_coverage_directory = os.path.join(os.curdir, 'tmp')
     if os.path.exists(temp_coverage_directory):
         shutil.rmtree(temp_coverage_directory)
     os.mkdir(temp_coverage_directory)
 
-    # удаление предыдущих результатов
-    # for root, dirs, files in os.walk(config.path_to_test_folder):
-    #     for dir in dirs:
-    #         if '_Result' in dir:
-    #             shutil.rmtree(os.path.join(root,dir))
 
 
     

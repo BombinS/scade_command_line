@@ -23,7 +23,6 @@ def main():
         # прогресс
         print('----------------------------------------------------------------------------------------------------------------------------')
         print(f'project {n}/{number_of_projects}')
-        # print(projects[i], '+', projects[i+1], flush=True)
 
         # формирование команды
         command = process.get_command(config.path_to_scade_bin, config.path_to_root_model, config.clcm_temp_directory, projects[i], projects[i+1])
