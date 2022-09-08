@@ -9,7 +9,9 @@ def search_raw_test_result_files(path):
         for file in files:
             name = file.lower()
             if '.txt' in name and '_raw' in name:
-                result.append(os.path.abspath(os.path.join(root, file)))
+                fullName = os.path.abspath(os.path.join(root, file))
+                if '_auto_results' in fullName.lower():
+                    result.append(os.path.abspath(os.path.join(root, file)))
     
     return result
 
@@ -17,7 +19,6 @@ def search_raw_test_result_files(path):
 def form_test_results_file(test_results):
     tte_report_sources = config.tte_report_sources
     tte_report_sources_dir = os.path.dirname(tte_report_sources)
-    #tte_report_tmp = os.path.join(temp_directory,'tte_report_tmp.txt')
 
     try:
         if os.path.exists(tte_report_sources_dir):
