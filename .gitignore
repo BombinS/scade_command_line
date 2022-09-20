@@ -1,5 +1,5 @@
 **/__pycache__
-**/tmp
+**/tmp*
 *.log
 *.txt
 *.code-workspace
