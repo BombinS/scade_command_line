@@ -6,7 +6,7 @@ def search_etp_files(path):
     for root, dirs, files in os.walk(path):
         for file in files:
             name = file.lower()
-            if '.etp' in name and not '_result.etp' in name:
+            if '.etp' in name and not '_result.etp' in name and not '_results.etp' in name :
                 result.append(os.path.abspath(os.path.join(root, file)))
 
     return result

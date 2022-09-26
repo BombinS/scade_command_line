@@ -21,24 +21,27 @@ def main():
     n = 1
     for project in projects:
 
-        # прогресс
-        print('----------------------------------------------------------------------------------------------------------------------------')
-        print(f'project {n}/{number_of_projects}')
-        print(project, flush=True)
-        
         # поиск тестовой процедуры
         procedures = process.search_stp_files(project)
+        number_of_procedures = len(procedures)
 
         # для каждой процедуры
+        nn = 1
         for procedure in procedures:
-        
+
+            # прогресс
+            print('----------------------------------------------------------------------------------------------------------------------------')
+            print(f'project {n}/{number_of_projects} procedure {nn}/{number_of_procedures}')
+            print(f'{project} {procedure}', flush=True)
+
             # формирование команды
             command = process.get_command(config.path_to_scade_bin, config.path_to_root_model, procedure)
 
             # выполнение команды
             process.execute_command(command)
-            n += 1
+            nn = nn + 1
 
-    
+        n = n + 1
+
 if __name__ == '__main__':
     main()
